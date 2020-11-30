@@ -1,0 +1,60 @@
+<h2 class="text-center text-dark m-4">Lista de Clientes</h2>
+<hr>
+
+<div class="card">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form>
+                <div class="row container mt-4">
+                    <div class="col-md-3 mt-2">
+                        <button [routerLink]="['/client-regist']" class="btn btn-primary btn-block btn-sm">Nuevo cliente</button>
+                    </div>
+                    <div class="col-md-9 mt-2">
+                        <div>
+                            <input [(ngModel)]="searchText" type="text" name="searchText" class="form-control form-control-sm btn-outline-secondary ops" placeholder=" Buscar...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row container mt-4">
+                    <div class="container small">
+                        <div class="row fadeIn">
+                            <div class="col-12">
+
+                                <table class="table table-sm table-hover table-responsive-sm table-borderless table-responsive-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>NOMBRE</th>
+                                            <th>DIRECCIÓN</th>
+                                            <th>CORREO</th>
+                                            <th>TELÉFONO</th>
+                                            <th>ACCIÓN</th>
+                                            <th>ACCIÓN</th>
+                                        </tr>
+                                    </thead>
+
+                                    <!-- SE MUESTRA CUANDO HAY REGISTROS -->
+                                    <tbody>
+                                        <tr *ngFor="let customer of arrCustomers | filter:searchText">
+                                            <td>{{customer.strFullName}}</td>
+                                            <td>{{customer.strAddress}}</td>
+                                            <td>{{customer.strEmail}}</td>
+                                            <td>{{customer.strTelephone}}</td>
+                                            <td>
+                                                <button [routerLink]="['/client-edit', customer._id]" type="submit" class="btn btn-sm btn-success">Editar</button>
+                                            </td>
+                                            <td>
+                                                <button (click)="deleteCustomer(customer._id)" type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

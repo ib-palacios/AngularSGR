@@ -1,0 +1,95 @@
+<h2 class="text-center text-dark m-4">Seguimiento de reparación</h2>
+<h5 class="text-center text-dark m-4">Registro de estatus</h5>
+<hr>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <form (ngSubmit)="updateOrder(forma)" #forma="ngForm">
+                        <div class="row container ml-1 mt-4">
+         
+                            <div class="col-md-12 mt-2">
+                                <label>Cliente</label>
+                                <select class="custom-select selectpicker form-control form-control-sm" data-live-search="true" type="text" title="Seleccione Cliente" name="idCustomer" [(ngModel)]="objOrder.idCustomer" required #idCustomer="ngModel" disabled>
+                                    <option *ngFor="let customer of arrCustomers"  [(ngValue)]="customer._id" > {{customer.strFullName}} </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 mt-2">
+                                <label>Dispositivo</label>
+                                <input class="form-control form-control-sm" type="text " name="strDevice" [(ngModel)]="objOrder.strDevice" required #strDevice="ngModel" disabled>
+                            </div>
+
+                            <div class="col-md-4 mt-2">
+                                <label>Modelo</label>
+                                <input class="form-control form-control-sm" type="text " name="strModel" [(ngModel)]="objOrder.strModel" required #strModel="ngModel" disabled>
+                            </div>
+
+                            <div class="col-md-4 mt-2">
+                                <label>Color</label>
+                                <input class="form-control form-control-sm" type="text " name="strColor" [(ngModel)]="objOrder.strColor" required #strColor="ngModel" disabled>
+
+                            </div>
+
+                            <div class="col-md-4 mt-2">
+                                <label>Fecha de atención</label>
+                                <input class="form-control form-control-sm" type="text" name="dteDateOfAttention" [(ngModel)]="objOrder.dteDateOfAttention" required #dteDateOfAttention="ngModel" disabled>
+                            </div>
+                           
+                            <div class="col-md-4 mt-2">
+                                <label>IMEI</label>
+                                <input class="form-control form-control-sm" type="text " name="strImei" [(ngModel)]="objOrder.strImei" required #strImei="ngModel" disabled>
+                            </div>
+
+                            <div class="col-md-4 mt-2">
+                                <label> $ Monto</label>
+                                <input class="form-control form-control-sm" type="text " name="strAmountPayable" [(ngModel)]="objOrder.strAmountPayable" required #strAmountPayable="ngModel" disabled>
+                            </div>                                                        
+                            
+                            <div class="col-md-4 mt-2">
+                                <label>Trabajo a realizar</label>
+                                <textarea class="form-control form-control-sm" rows="3" placeholder="Por Hacer" name="strWorkToDo" [(ngModel)]="objOrder.strWorkToDo" required #strWorkToDo="ngModel" disabled></textarea>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label>Trabajo que se ha realizado</label>
+                                <textarea [class.is-invalid]="strStatusComment.invalid && strStatusComment.touched" class="form-control form-control-sm" rows="3" placeholder="Observaciones" name="strStatusComment" [(ngModel)]="objOrder.strStatusComment" required #strStatusComment="ngModel"></textarea>
+                                <div class="invalid-feedback" *ngIf="strStatusComment.errors?.required">
+                                    <small>
+                                        Por favor, ingrese la descripción del problema del dispositivo.
+                                    </small>
+                                </div>
+                            </div> 
+                            
+                            <div class="col-4 mt-2">
+                                <label>Estatus de reparación</label>
+                                <select [class.is-invalid]="idRepairStatus.invalid && idRepairStatus.touched" class="custom-select selectpicker form-control form-control-sm" type="text" title="Estatus" name="idRepairStatus" [(ngModel)]="objOrder.idRepairStatus" #idRepairStatus="ngModel" required>
+                                    <option *ngFor="let estatus of arrRepairStatus"  [ngValue]="estatus._id" > {{estatus.strStatus}} </option>
+                                </select>
+                            </div>
+                            <div class="invalid-feedback" *ngIf="idRepairStatus.errors?.required">
+                                <small>
+                                    Por favor, seleccione una opción.
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="container ml-2 mt-2 mb-5">
+                            <div class="row">
+                                <div class="col-12 col-md-6 mt-1">          
+                                    <button [disabled]="forma.invalid" type="sumbit" class="btn btn-sm btn-block btn-primary float-right">Registrar</button>                               
+                                </div>
+                                <div class="col-12 col-md-6 mt-1">
+                                    <button [routerLink]="['/tracking-order-list']" type="sumbit" class="btn btn-sm btn-block btn-danger float-left">Volver</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
